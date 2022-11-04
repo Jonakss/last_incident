@@ -10,7 +10,7 @@ function App() {
   const [incidents, setIncidents] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:3001/incidents")
+    fetch("http://localhost:3001/incidents?limit=10")
     .then(response => response.json())
     .then(incident_list => {
       console.log(incident_list);
@@ -26,16 +26,19 @@ function App() {
     <div className="App">
       <h1>Last incident</h1>
       <h2>Days w/o incidents: { incidents.length > 0? getDaysCount(incidents[0].date) : 0 }</h2>
-      <div className='incident_lists'>
+      <div className='incident_list'>
         <ul>
           { 
+            incidents.length > 0 ?  
             incidents.map(incident =>{
-              return <li key={incident.date}>
-                <p>{ `${incident.date} - ${incident.description}` }</p>
-                <span>{incident.level}</span>
+              return <li key={incident.date} className={incident.impact}>
+                <p>{ `${new Date(incident.date).toDateString()} - ${incident.description}` }</p>
+                <span>{incident.impact}</span>
               </li>
             })
+            : <p>No incidents reported</p>
           }
+          <button onClick={() => {console.log("Should retrieve more incidents")}}>Load more...</button>
         </ul>
       </div>
     </div>
