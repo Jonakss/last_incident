@@ -10,7 +10,7 @@ function App() {
   const [incidents, setIncidents] = useState([]);
 
   useEffect(() => {
-    let url = `${window.location.href.split(":3000")[0]}:3001/incidents?limit=10`
+    let url = `${window.location.host.split(":")[0]}:3001/incidents?limit=10`
     fetch(url)
     .then(response => response.json())
     .then(incident_list => {
