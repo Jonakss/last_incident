@@ -10,6 +10,7 @@ function App() {
   const [incidents, setIncidents] = useState([]);
   
   useEffect(() => {
+    const port = ""
     let url = port !== "" ? `http://${window.location.host.split(":")[0]}:${port}/incidents?limit=10` : "/incidents?limit=10";
     fetch(url)
     .then(response => response.json())
