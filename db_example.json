@@ -1,11 +1,13 @@
 {
     "incidents": [
       {
+        "id": 2,
         "date": "2022-11-05",
         "description": "Incident 2",
         "impact": "medium"
       },
       {
+        "id": 1,
         "date": "2022-10-28",
         "description": "Incident 1",
         "impact": "high"
