@@ -1,21 +1,14 @@
-# Using node:16-alpine base image
-FROM node:16-alpine 
+FROM node:16-alpine
 
-# Set /app as the default work directory
 WORKDIR /app
 
-# copy package.json to the working directory for packages installation
-COPY package.json /app
+RUN npm install -g json-server
 
-# Install npm dependencies
-RUN npm install
+COPY /build /app/public
+COPY ./db_example.json /app/
 
-# Copy all the project files to the working directory
-COPY . .
+RUN mv /app/db_example.json /app/db.json
 
-# Expose the port of your application to bind with the host port
 EXPOSE 3000
-EXPOSE 3001
 
-# run your app
-CMD ["/usr/local/bin/npm", "run", "start"]
+CMD ["/usr/local/bin/npx", "json-server", "--watch", "/app/db.json", "--host", "0.0.0.0"]

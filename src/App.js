@@ -2,15 +2,17 @@ import logo from './logo.svg';
 import './App.css';
 import React, { useState, useEffect } from 'react';
 
+
 function App() {
   const getDaysCount = (last) =>{
     const difference = new Date().getTime() - new Date(last).getTime();
     return Math.floor(difference / (1000 * 3600 * 24));
   };
   const [incidents, setIncidents] = useState([]);
-
+  
   useEffect(() => {
-    let url = `${window.location.host.split(":")[0]}:3001/incidents?limit=10`
+    const port="3001"
+    let url = port !== "" ? `http://${window.location.host.split(":")[0]}:${port}/incidents?limit=10` : "/incidents?limit=10";
     fetch(url)
     .then(response => response.json())
     .then(incident_list => {
@@ -41,7 +43,7 @@ function App() {
             : <p>No incidents reported</p>
           }
         </ul>
-        <button onClick={() => {console.log("Should retrieve more incidents")}}>Load more...</button>
+        <button onClick={() => {console.log("Should retrieve more incidents...")}}>Load more...</button>
       </div>
     </div>
   );
