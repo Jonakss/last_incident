@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import React, { useState, useEffect } from 'react';
 
@@ -37,7 +36,7 @@ function App() {
               return <li key={incident.date} className={incident.impact }>
                 <p>{ `${new Date(incident.date).toDateString()} - ${incident.description}` }</p>
                 <span>{ incident.impact }</span>
-                { new Date(incident.date).getDay() == 5 ? <p>Read only friday!!</p> : "" }
+                { new Date(incident.date).getDay() === 5 ? <p>Read only friday!!</p> : "" }
               </li>
             })
             : <p>No incidents reported</p>
