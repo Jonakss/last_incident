@@ -27,8 +27,8 @@ function App() {
   }
 
   useEffect(() => {
-    const port = "3000"
-    let url = port !== "" ? `http://${window.location.host.split(":")[0]}:${port}/incidents?_sort=id&_order=desc` : "/incidents?limit=10";
+    const port = undefined
+    let url = port !== "" ? `http://${window.location.host.split(":")[0]}:${port ? port: window.location.host.split(":")[1]}/incidents?_sort=id&_order=desc` : "/incidents?limit=10";
     fetch(url)
     .then(response => response.json())
     .then(incident_list => {

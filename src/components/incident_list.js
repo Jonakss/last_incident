@@ -2,8 +2,8 @@ import React from 'react'
 
 const IncidentsList = ({incidents, handleRemoveIncident}) => {
     const handleDelete = (id) => {
-        const port = "3000"
-        fetch(`http://${window.location.host.split(":")[0]}:${port}/incidents/${id}`, {
+        const port = undefined
+        fetch(`http://${window.location.host.split(":")[0]}:${port ? port: window.location.host.split(":")[1]}/incidents/${id}`, {
         "method": 'DELETE',
         "headers": {
             'Content-Type': 'application/json'
