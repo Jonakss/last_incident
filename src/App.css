@@ -29,3 +29,17 @@
 .incident_list .high {
     border-left-color: red;
 }
+
+.new_incident {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.new_incident form {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}

@@ -1,6 +1,7 @@
 import './App.css';
 import React, { useState, useEffect } from 'react';
 import IncidentsList from './components/incident_list';
+import NewIncident from './components/new_incident';
 
 
 function App() {
@@ -16,23 +17,13 @@ function App() {
     setIncidents(new_incidents)
   }
   
-  const handleNewIncident = () => {
-    let data = {
-      "date": '2022-11-04',
-      "impact": "low",
-      "description": "Incident 3"
-    };
-    fetch(`http://${window.location.host.split(":")[0]}:3001/incidents`, {
-      "method": 'POST',
-      "headers": {
-        'Content-Type': 'application/json'
-      },
-      "body": JSON.stringify(data) 
-    }).then(response => response.json())
-    .then(new_incident => {
+  const handleNewIncident = (new_incident) => {
+    if(new_incident){
       console.log(new_incident);
       setIncidents([new_incident, ...incidents])
-    })
+    }else{
+      console.log("Error while creating a new incident")
+    }
   }
 
   useEffect(() => {
@@ -53,9 +44,9 @@ function App() {
   return (
     <div className="App">
       <h1>Last incident</h1>
-      <h2>Days w/o incidents: { incidents.length > 0? getDaysCount(incidents[0].date) : 0 }</h2>
+      <h2>Days w/o incidents: { incidents.length > 0? getDaysCount(new Date(incidents[0].date).toDateString()) : 0 }</h2>
       <IncidentsList incidents={incidents} handleRemoveIncident = { handleRemoveIncident }></IncidentsList>
-      <button onClick={ handleNewIncident}>Add new incident</button>
+      <NewIncident onNewIncident={(new_incident) => handleNewIncident(new_incident) }></NewIncident>
     </div>
   );
 }

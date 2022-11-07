@@ -32,7 +32,7 @@ const IncidentsList = ({incidents, handleRemoveIncident}) => {
             : <p>No incidents reported</p>
           }
         </ul>
-        <button onClick={() => {console.log("Should retrieve more incidents...")}}>Load more...</button>
+        <button onClick={() => {console.log("Should retrieve more incidents...")}} >Load more...</button>
       </div>
     )
 }
