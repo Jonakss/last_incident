@@ -2,6 +2,7 @@ import React from 'react'
 
 const NewIncident = ({onNewIncident}) => {
     const handleNewIncident = (e)=>{
+        const port = "3000"
         e.preventDefault();
         let data = {
             description: e.target.description.value,
@@ -19,7 +20,7 @@ const NewIncident = ({onNewIncident}) => {
         //     "impact": "low",
         //     "description": "Incident 3"
         //   };
-          fetch(`http://${window.location.host.split(":")[0]}:3001/incidents`, {
+          fetch(`http://${window.location.host.split(":")[0]}:${port}/incidents`, {
             "method": 'POST',
             "headers": {
               'Content-Type': 'application/json'
