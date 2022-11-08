@@ -2,6 +2,7 @@ import './App.css';
 import React, { useState, useEffect } from 'react';
 import IncidentsList from './components/incident_list';
 import NewIncident from './components/new_incident';
+import { get_all_incidents } from './services/incidents';
 
 
 function App() {
@@ -27,18 +28,10 @@ function App() {
   }
 
   useEffect(() => {
-    const port = undefined
-    let url = `http://${window.location.host.split(":")[0]}:${port ? port: window.location.host.split(":")[1]}/incidents?_sort=id&_order=desc&limit=10`;
-    fetch(url)
-    .then(response => response.json())
-    .then(incident_list => {
+    get_all_incidents(incident_list => {
       console.log(incident_list);
       setIncidents(incident_list);
-    })
-    .catch(error => {
-      console.log(error)
     });
-    console.log("");
   }, [])
 
   return (

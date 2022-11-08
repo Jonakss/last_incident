@@ -1,39 +1,27 @@
 import React from 'react'
+import { create_new_incident } from '../services/incidents';
 
 const NewIncident = ({onNewIncident}) => {
     const handleNewIncident = (e)=>{
-        const port = undefined
         e.preventDefault();
+
         let data = {
-            description: e.target.description.value,
-            date: new Date(e.target.datetime.value).toUTCString(),
-            impact: e.target.impact.value
-        };
+            "description": e.target.description.value,
+            "date": new Date(e.target.datetime.value).toUTCString(),
+            "impact": e.target.impact.value
+        }
+
         console.log(data);
 
         if(!data.description || ! data.date || ! data.impact){
             console.log("Falta info...")
             return ;
         }
-        // let data = {
-        //     "date": '2022-11-04',
-        //     "impact": "low",
-        //     "description": "Incident 3"
-        //   };
-          fetch(`http://${window.location.host.split(":")[0]}:${port ? port: window.location.host.split(":")[1]}/incidents`, {
-            "method": 'POST',
-            "headers": {
-              'Content-Type': 'application/json'
-            },
-            "body": JSON.stringify(data) 
-          }).then(response => response.json())
-          .then(new_incident => {
+
+        create_new_incident(data, (new_incident) => {
             onNewIncident(new_incident);
             e.target.reset();
-          }).catch(error => {
-              console.log(error);
-              onNewIncident(undefined);
-          })
+        }, () => {onNewIncident(undefined);})
     }
     return(
         <div className='new_incident'>

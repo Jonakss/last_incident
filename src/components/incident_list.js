@@ -1,22 +1,16 @@
 import React from 'react'
+import { delete_incident, get_all_incidents, crea } from '../services/incidents'
 
 const IncidentsList = ({incidents, handleRemoveIncident}) => {
     const handleDelete = (id) => {
-        const port = undefined
-        fetch(`http://${window.location.host.split(":")[0]}:${port ? port: window.location.host.split(":")[1]}/incidents/${id}`, {
-        "method": 'DELETE',
-        "headers": {
-            'Content-Type': 'application/json'
-        }
-        }).then(response => {
-            console.log(response)
-            if(response.status === 200){
-                handleRemoveIncident(id)
-            }
-            return response.json()
+        delete_incident(id, (response) => {
+          console.log(response)
+          if(response.status === 200){
+              handleRemoveIncident(id)
+          }
+          return response.json()
         })
     }
-
     return(
         <div className='incident_list'>
         <ul>
