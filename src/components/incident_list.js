@@ -1,5 +1,6 @@
 import React from 'react'
 import { delete_incident, get_all_incidents, crea } from '../services/incidents'
+import Incident from './incident_item'
 
 const IncidentsList = ({incidents, handleRemoveIncident}) => {
     const handleDelete = (id) => {
@@ -11,18 +12,18 @@ const IncidentsList = ({incidents, handleRemoveIncident}) => {
           return response.json()
         })
     }
+    const handleEdit = incident => {
+      
+    };
     return(
         <div className='incident_list'>
         <ul>
           { 
             incidents.length > 0 ?  
             incidents.map(incident =>{
-              return <li key={incident.id} className={incident.impact }>
-                <p>{ `${new Date(incident.date).toDateString()} - ${incident.description}` }</p>
-                <span>{ incident.impact }</span>
-                { new Date(incident.date).getDay() === 5 ? <p>Read only friday!!</p> : "" }
-                <button onClick={ () => handleDelete(incident.id)}>Delete</button>
-              </li>
+              return (
+                <Incident key={incident.id} incident={incident} onDelete={() => {handleDelete(incident.id)}}></Incident>
+              )
             })
             : <p>No incidents reported</p>
           }
