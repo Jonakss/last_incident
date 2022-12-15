@@ -1,5 +1,5 @@
 import React from 'react'
-import { delete_incident, get_all_incidents, crea } from '../services/incidents'
+import { delete_incident} from '../services/incidents'
 import Incident from './incident_item'
 
 const IncidentsList = ({incidents, handleRemoveIncident}) => {
@@ -12,9 +12,9 @@ const IncidentsList = ({incidents, handleRemoveIncident}) => {
           return response.json()
         })
     }
-    const handleEdit = incident => {
+    // const handleEdit = incident => {
       
-    };
+    // };
     return(
         <div className='incident_list'>
         <ul>
