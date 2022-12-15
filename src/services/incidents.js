@@ -1,4 +1,4 @@
-const port = "3000"
+const port = "9300"
 
 export const get_all_incidents = (callback) => {
     let url = `http://${window.location.host.split(":")[0]}:${port ? port: window.location.host.split(":")[1]}/incidents?_sort=id&_order=desc&limit=10`;
