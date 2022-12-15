@@ -1,5 +1,6 @@
 FROM node:16-alpine
 
+RUN mkdir /app
 WORKDIR /app
 
 RUN npm install -g json-server
