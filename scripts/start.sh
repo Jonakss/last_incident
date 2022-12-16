@@ -2,7 +2,7 @@
 
 if [ -z "$DB_FILE" ]; then
     echo "DB_FILE is not set"
-    DB_FILE="/app/db.json"
+    DB_FILE="/app/data/db.json"
 fi
 
 if [ ! -f $DB_FILE ]; then
